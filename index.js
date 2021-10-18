@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
 app.use(express.json());
+
+app.use("/api/users", require("./routes/userRoutes"));
 
 mongoose
   .connect(process.env.DB_URI, {
@@ -17,6 +20,6 @@ mongoose
     process.exit(1);
   });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running at port ${process.env.PORT}`);
+app.listen(process.env.port, () => {
+  console.log(`Server is running at port ${process.env.port}`);
 });
